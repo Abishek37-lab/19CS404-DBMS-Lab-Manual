@@ -94,52 +94,57 @@ The Central Library wants to manage book lending and cultural events.
 
 ---
 
-# Scenario C: Restaurant Table Reservation & Ordering
+##  Scenario C: Restaurant Table Reservation & Ordering
 
-**Business Context:**  
-A popular restaurant wants to manage reservations, orders, and billing.
+###  Business Context
+A popular restaurant wants to manage *reservations, orders, and billing*.
 
-**Requirements:**  
-- Customers can reserve tables or walk in.  
-- Each reservation includes date, time, and number of guests.  
-- Customers place food orders linked to reservations.  
-- Each order contains multiple dishes; dishes belong to categories (starter, main, dessert).  
-- Bills generated per reservation, including food and service charges.  
-- Waiters assigned to serve reservations.
+###  Requirements
+- Customers can *reserve tables* or walk in.  
+- Each reservation includes *date, time, number of guests*.  
+- Customers place *food orders linked to reservations*.  
+- Each order contains *multiple dishes; dishes belong to **categories* (starter, main, dessert).  
+- *Bills* generated per reservation, including food and service charges.  
+- *Waiters* assigned to serve reservations.  
 
-### ER Diagram:
-*Paste or attach your diagram here*  
-![ER Diagram](er_diagram_restaurant.png)
+###  ER Diagram
+![WhatsApp Image 2025-08-29 at 14 35 17_70104f15](https://github.com/user-attachments/assets/a20b22a6-154f-4287-be24-9239a5bfd22e)
 
-### Entities and Attributes
+###  Entities and Attributes
+| Entity    | Attributes (PK, FK) | Notes |
+|-----------|----------------------|-------|
+| Customer  | CustomerID (PK), Name, Contact | Makes reservations |
+| Reservation | ReservationID (PK), Date, Time, Guests, CustomerID (FK), TableID (FK) | Booking info |
+| Table     | TableID (PK), Capacity, Location | Dining tables |
+| Order     | OrderID (PK), ReservationID (FK), Time | Linked to reservations |
+| Dish      | DishID (PK), Name, Category, Price | Ordered item |
+| OrderDetail | OrderID (FK), DishID (FK), Quantity | Resolves M:N |
+| Bill      | BillID (PK), ReservationID (FK), Amount, ServiceCharge | Final payment |
+| Waiter    | WaiterID (PK), Name | Assigned to reservations |
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-
-### Relationships and Constraints
-
+###  Relationships and Constraints
 | Relationship | Cardinality | Participation | Notes |
-|--------------|------------|---------------|-------|
-|              |            |               |       |
-|              |            |               |       |
-|              |            |               |       |
+|--------------|-------------|---------------|-------|
+| Customer–Reservation | 1:N | Partial | A customer can have multiple reservations |
+| Reservation–Table | 1:1 | Total | One reservation per table |
+| Reservation–Order | 1:N | Total | Orders linked to reservation |
+| Order–Dish | M:N | Total | Resolved using OrderDetail |
+| Reservation–Bill | 1:1 | Total | One bill per reservation |
+| Reservation–Waiter | 1:1 | Partial | Assigned waiter |
 
-### Assumptions
-- 
-- 
-- 
+###  Assumptions
+- Each reservation *occupies one table* only.  
+- Bills always generated *per reservation*.  
+- Service charges fixed percentage (not modeled).  
+
+---
+##  Instructions for Students
+1. Complete *all three scenarios (A, B, C)*.  
+2. Identify *entities, relationships, and attributes* for each scenario.  
+3. Draw ER diagrams using *draw.io / diagrams.net* (or hand-drawn & scanned).  
+4. Fill in *Entities, Relationships, Assumptions* tables.  
+5. Export the completed Markdown (with diagrams) as a *single PDF*.  
 
 ---
 
-## Instructions for Students
-
-1. Complete **all three scenarios** (A, B, C).  
-2. Identify entities, relationships, and attributes for each.  
-3. Draw ER diagrams using **draw.io / diagrams.net** or hand-drawn & scanned.  
-4. Fill in all tables and assumptions for each scenario.  
-5. Export the completed Markdown (with diagrams) as **a single PDF**
+  End of Submission Template
